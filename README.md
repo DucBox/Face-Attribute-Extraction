@@ -1,2 +1,2 @@
 # Face-Attribute-Extraction
-My AI Project 
+Object Detection + Image Classification 
