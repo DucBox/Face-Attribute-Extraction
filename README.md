@@ -65,11 +65,15 @@ Recall: 0.8, Precision: 0.863, mAP50: 0.871, mAP50-95: 0.533.
 
 Evaluate ResNet50: 
 
-Accuracy during training is stable at nearly 100%, this is a quite high number. However, the testing accuracy is lower at approximately 95% but has more fluctuations, which shows that the model may be overfitting to the training data. 
-Precision: The model shows high precision on training data but exhibits lower precision and variability on testing data.
-Recall: Recall is high for training but drops for validation data, suggesting issues with generalization.
-Loss: Training loss decreases sharply and stabilizes, while validation loss trends upwards after initial decrease, indicating overfitting.
-AUC: AUC values are high for both training and validation, demonstrating strong classification ability despite other issues.
+Accuracy during training is stable at nearly 100%, this is a quite high number. However, the testing accuracy is lower at approximately 95% but has more fluctuations, which shows that the model may be overfitting to the training data. Val_acc: 0.95
+
+Precision: The model shows high precision on training data but exhibits lower precision and variability on testing data. Val_Precision: 0.92
+
+Recall: Recall is high for training but drops for validation data, suggesting issues with generalization. Val_Recall: 0.95
+
+Loss: Training loss decreases sharply and stabilizes, while validation loss trends upwards after initial decrease, indicating overfitting. Val_loss: 0.22
+
+AUC: AUC values are high for both training and validation, demonstrating strong classification ability despite other issues. Val_AUC: 0.97
 
 
 ## Installation
