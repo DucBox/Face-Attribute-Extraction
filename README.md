@@ -1,7 +1,9 @@
 # Facial Extraction Project
 
 ## Description
-This project focuses on developing a facial feature extraction system using deep learning models. It integrates face detection and feature extraction to facilitate advanced applications like facial recognition, emotion detection, and more.
+This project focuses on developing a facial feature extraction system using deep learning models. It integrates face detection and feature extraction to facilitate advanced applications like facial recognition, gender classification, and more. 
+
+Method: use 2 separate models (YOLOV8s for head/face detection and ResNet50 for classification, extracting attributes) with the purpose of being able to evaluate 2 models independently to be able to Improve and optimize without affecting each other
 
 ## Table of Contents
 - [Project Description](#description)
@@ -16,43 +18,69 @@ This project focuses on developing a facial feature extraction system using deep
 
 ## Data Collection
 ### Data Sources
-Describe where and how you collected your data, including any partnerships with institutions or datasets that are publicly available.
+We use a raw data set collected from sources on Kaggle including 10,000 daily life photos. The images have stable resolution, there are few blurred or noisy images and almost over 90% of the images can be used for 'labeling'.  
 
 ### Data Labeling
-Explain how the data was labeled, mentioning any tools or techniques used, such as manual labeling by human annotators or automated labeling tools.
+To make the data set as complete as possible, we have filtered out images with poor resolution, poor quality, taken at the wrong location, or images without human subjects. The labeling tool used is Roboflow.
+
+Data for Detection: After completing the labeling process for sample 1, it is estimated that 7,376 images have been labeled (resized to 640x640) with a total of 35,310 images.
+
+Data for Classification: With the data for the Resnet50 model, the statistics show that it was done to label 7233 images (resized to 224x224).
 
 ### Data Augmentation
-Detail any data augmentation techniques you applied to enrich the dataset and reduce overfitting, like rotation, flipping, scaling, etc.
+With the data for the head dectetion problem, we performed data augmentation techniques directly on Roboflow. 
+
+Data for Detection: The team obtained a larger data set of up to 17,000 images for the training set and 2000 images for the validation set. Includes Flip: Horizontal, Crop: 0% Minimum Zoom, 30% Maximum Zoom, Exposure: Between -16% and +16%, Bounding Box: Blur, Noise, Rotation
+
+Data for Classification: After performing data augmentation techniques directly on Roboflow, we have obtained a larger data set of up to 15,177 images for the training set, 2174 images for the validation set, and 600 images for the test set.
 
 ## Model Training
 ### Environment
-Mention the software and hardware environment used for training, such as TensorFlow or PyTorch, GPU specs, etc.
+2 models were trained separately by using GPU from Google Colab. The first one YOLOv8s was trained using Pytorch while ResNet using Keras. 
 
-### Algorithms
-Describe the algorithms used, including YOLOv8s for face detection and ResNet50 for feature extraction. Provide insights into why these models were chosen.
+### Models
+
+#### YOLOv8s for Face Detection
+The YOLO (You Only Look Once) series is well-known for its efficiency and accuracy in object detection tasks. We chose YOLOv8s, the latest iteration in the YOLO series, for face detection due to its enhanced performance and speed. YOLOv8s is designed to be incredibly fast, making it ideal for real-time applications. It achieves high accuracy while being able to detect faces in various lighting conditions and angles, which is crucial for the robustness of our facial extraction system.
+
+#### ResNet50 for Feature Extraction
+ResNet50 is part of the Residual Network family, which is famous for its deep architecture that effectively addresses the vanishing gradient problem through the use of skip connections. We selected ResNet50 due to its powerful feature extraction capabilities. This model can capture intricate details from detected faces, providing a rich set of features necessary for subsequent analysis tasks such as facial recognition or emotion detection. ResNet50's ability to learn from a large amount of data and its generalization over different facial attributes make it an excellent choice for our project.
+
+#### Why These Models Were Chosen
+The combination of YOLOv8s and ResNet50 offers a balance of speed and accuracy, which is essential for deploying a practical facial recognition system. YOLOv8s provides fast and reliable face detection, which is critical for real-time processing scenarios. Meanwhile, ResNet50 complements this by delivering detailed and comprehensive feature extraction, enabling accurate identification and classification of facial features. This synergy ensures our system not only detects faces quickly but also analyzes them with high precision, making it suitable for a variety of applications from security systems to marketing analysis.
 
 ### Training Process
-Discuss the training process, including steps like pre-processing, splitting data into training/test sets, parameter tuning, etc.
+Training YOLOv8s: Image_size's Input: 640x640, batch_size: default, epoch: 50, data was split into 2 main parts: 85% for training and 15% for validation.
 
-### Challenges
-List any challenges faced during model training and how they were addressed.
+Training ResNet50: Image_size's Input: 224x224, model was pre-trained on ImageNet dataset, which are not really suitable for human (face) task but there are some features that might be useful for our problem. Batch_size: 32, epoch: 50, optimizer: Adam and we used Early Stopping with val_loss, patience = 5 in order to avoid being 'overfitting'. Data was split into 2 main parts: 85% for training and 15% for validation.
 
 ## Model Features
 ### Architecture
 Provide details about the model architecture, including any modifications made to the original YOLOv8s and ResNet50 models.
 
-### Performance Metrics
-Explain the metrics used to evaluate the model, such as accuracy, precision, recall, and F1-score.
-
 ## Results
 ### Model Evaluation
-Discuss how the model was evaluated, including performance metrics and comparison with baseline models.
+Evaluate YOLOv8s: 
 
-### Visualizations
-Include any plots or visual representations of the model's performance, such as ROC curves, confusion matrices, etc.
+Train loss and Val loss decreased steadily and gradually converges as the epoch increases while accurcay in both training set, validation set were increasing. 
+Recall: 0.8, Precision: 0.863, mAP50: 0.871, mAP50-95: 0.533.
+
+Evaluate ResNet50: 
+
+Accuracy during training is stable at nearly 100%, this is a quite high number. However, the testing accuracy is lower at approximately 95% but has more fluctuations, which shows that the model may be overfitting to the training data. 
+Precision: The model shows high precision on training data but exhibits lower precision and variability on testing data.
+Recall: Recall is high for training but drops for validation data, suggesting issues with generalization.
+Loss: Training loss decreases sharply and stabilizes, while validation loss trends upwards after initial decrease, indicating overfitting.
+AUC: AUC values are high for both training and validation, demonstrating strong classification ability despite other issues.
+
 
 ## Installation
-Provide step-by-step instructions for setting up the project environment.
+Run step by step: 
 
-```bash
-pip install -r requirements.txt
+Clone data from Roboflow, set up GPU/CPU, run all cells code in file 'Head Detection', save model_yolov8s.pt
+
+Clone data from Roboflow, set up GPU/CPU, run all cells code in file 'ResNet50', save model_resnet50.h5
+
+Run all cells code in file 'Connection' in order to connect 2 models so that you will have a perfect model for further custom
+
+
