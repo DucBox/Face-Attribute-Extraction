@@ -67,12 +67,12 @@ The outputs from the YOLOv8s face detection are directly fed into the modified R
 
 ## Results
 ### Model Evaluation
-Evaluate YOLOv8s: 
+#### Evaluate YOLOv8s: 
 
 Train loss and Val loss decreased steadily and gradually converges as the epoch increases while accurcay in both training set, validation set were increasing. 
 Recall: 0.8, Precision: 0.863, mAP50: 0.871, mAP50-95: 0.533.
 
-Evaluate ResNet50: 
+#### Evaluate ResNet50: 
 
 Accuracy during training is stable at nearly 100%, this is a quite high number. However, the testing accuracy is lower at approximately 95% but has more fluctuations, which shows that the model may be overfitting to the training data. Val_acc: 0.95
 
