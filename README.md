@@ -12,8 +12,6 @@ Method: use 2 separate models (YOLOV8s for head/face detection and ResNet50 for 
 - [Model Features](#model-features)
 - [Results](#results)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Data Collection
@@ -82,5 +80,9 @@ Clone data from Roboflow, set up GPU/CPU, run all cells code in file 'Head Detec
 Clone data from Roboflow, set up GPU/CPU, run all cells code in file 'ResNet50', save model_resnet50.h5
 
 Run all cells code in file 'Connection' in order to connect 2 models so that you will have a perfect model for further custom
+
+##License
+Feel free to customize this template further based on the specifics of your project and the technologies used. This structured format helps ensure that all relevant aspects of your project are clearly communicated to potential users and contributors.
+
 
 
