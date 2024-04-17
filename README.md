@@ -52,9 +52,16 @@ Training YOLOv8s: Image_size's Input: 640x640, batch_size: default, epoch: 50, d
 
 Training ResNet50: Image_size's Input: 224x224, model was pre-trained on ImageNet dataset, which are not really suitable for human (face) task but there are some features that might be useful for our problem. Batch_size: 32, epoch: 50, optimizer: Adam and we used Early Stopping with val_loss, patience = 5 in order to avoid being 'overfitting'. Data was split into 2 main parts: 85% for training and 15% for validation.
 
-## Model Features
-### Architecture
-Provide details about the model architecture, including any modifications made to the original YOLOv8s and ResNet50 models.
+## Model Architecture
+
+### YOLOv8s Modifications
+The YOLOv8s model in our project has been fine-tuned to enhance its efficiency in face detection tasks. We adjusted the input size to better accommodate the typical dimensions of faces in our dataset, optimizing the model to focus more precisely on facial features. Additionally, we customized the anchor boxes to better match the aspect ratios and scales of faces in diverse conditions, which helps improve detection accuracy.
+
+### ResNet50 Modifications
+For ResNet50, modifications were made to adapt the model to the specific needs of feature extraction from facial images. We incorporated additional convolutional layers to deepen the network, aiming to capture more detailed facial features essential for subsequent analysis tasks. Furthermore, dropout layers were added to prevent overfitting, maintaining the model's generalization capabilities across different facial datasets.
+
+### Integration
+The outputs from the YOLOv8s face detection are directly fed into the modified ResNet50 model for feature extraction. This integrated approach ensures seamless operation, where face detection and feature extraction are optimized to work in tandem, providing a robust system for accurate facial analysis.
 
 ## Results
 ### Model Evaluation
