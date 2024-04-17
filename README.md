@@ -23,7 +23,7 @@ Source for Classification:  We use a raw data set collected from sources on Kagg
 ### Data Labeling
 To make the data set as complete as possible, we have filtered out images with poor resolution, poor quality, taken at the wrong location, or images without human subjects. The labeling tool used is Roboflow.
 
-Data for Detection: After completing the labeling process for sample 1, it is estimated that 7,376 images have been labeled (resized to 640x640) with a total of 35,310 images.
+Data for Detection: After completing the labeling process, it is estimated that 7,376 images have been labeled (resized to 640x640) with a total of 35,310 images.
 
 Data for Classification: With the data for the Resnet50 model, the statistics show that it was done to label 7233 images (resized to 224x224).
 
