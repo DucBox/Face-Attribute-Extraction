@@ -16,7 +16,9 @@ Method: use 2 separate models (YOLOV8s for head/face detection and ResNet50 for 
 
 ## Data Collection
 ### Data Sources
-We use a raw data set collected from sources on Kaggle including 10,000 daily life photos. The images have stable resolution, there are few blurred or noisy images and almost over 90% of the images can be used for 'labeling'.  
+Source for Detection: We use a raw data set collected from sources on Kaggle including 10,000 daily life photos. The images have stable resolution, there are few blurred or noisy images and almost over 90% of the images can be used for 'labeling'.  
+
+Source for Classification:  We use a raw data set collected from sources on Kaggle including 10,000 daily life photos. The images have stable resolution, there are few blurred or noisy images and almost over 90% of the images can be used for 'labeling'.  
 
 ### Data Labeling
 To make the data set as complete as possible, we have filtered out images with poor resolution, poor quality, taken at the wrong location, or images without human subjects. The labeling tool used is Roboflow.
